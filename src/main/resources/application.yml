@@ -1,0 +1,45 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:test
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      data-locations: classpath*:db/h2/data.sql
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+server:
+  servlet:
+    encoding:
+      force-response: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/cpu_usage?serverTimezone=Asia/Seoul
+    username: root
+    password: green502
